@@ -1,0 +1,17 @@
+use DiscordWebhook from "webhook"
+use Server from "http"
+use System from "system"
+use File from "file"
+
+public int fn main(string[] args) {
+    puts("Starting server on port 8080")
+    Server.listen(8080, &void (string->any res, string->any req): {
+        if req::path == "/" {
+            res->content_type("text/html")
+            res->send(File->read("index.html"))
+        } else if req::path == "/send" {
+            DiscordWebhook->send(req->parameter("url"), req->parameter("message"))
+            res->send("Sent message")
+        }
+    })
+}
