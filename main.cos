@@ -1,6 +1,5 @@
 use DiscordWebhook from "webhook"
 use Server from "http"
-use System from "system"
 use File from "file"
 
 public int fn main(string[] args) {
